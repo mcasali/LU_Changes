@@ -9,7 +9,6 @@ from PIL import Image
 
 # Set wide mode
 st.set_page_config(layout='wide')
-git_data = r"https://raw.githubusercontent.com/Data/"
 
 # Set session state variables
 if 'zoom_center_x' not in st.session_state:
@@ -24,7 +23,7 @@ st.title("USGS/FORE-SCE Land Use Change Basins, 1978-2021")
 
 
 def get_centroid(gage_id_geo):
-    df = gpd.read_file(os.path.join(git_data, r"Geojsons/{}.geojson".format(gage_id_geo)))
+    df = gpd.read_file("./Data/Geojsons/{}.geojson".format(gage_id_geo))
     st.session_state.zoom_center_y = float(df["geometry"].centroid.x)
     st.session_state.zoom_center_x = float(df["geometry"].centroid.y) - 0.3
     st.session_state.zoom_level = 9
@@ -41,17 +40,17 @@ def show_data(gage_id):
 
     col1, col2 = st.columns(2)
     with col1:
-        image = Image.open(os.path.join(git_data, r"Plots/Tab_area_ID{}_changes.png".format(gage_id)))
+        image = Image.open("./Data/Plots/Tab_area_ID{}_changes.png".format(gage_id))
         st.image(image, caption='Cell changes')
 
     with col2:
         try:
-            video = open(os.path.join(git_data, r"Timelapses/{}.mp4".format(gage_id), 'rb'))
+            video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
             video_bytes = video.read()
             st.video(video_bytes)
         except FileNotFoundError:
             pass
-    csv_df = pd.read_csv(os.path.join(git_data, r"CSVs/Tab_area_ID{}_final.csv".format(gage_id)))
+    csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id))
     st.write(csv_df)
 
 
