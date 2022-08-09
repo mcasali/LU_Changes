@@ -1,0 +1,7 @@
+Old_LU_bin,New_LU_bin,Cell_Count
+Crop/Grass/Shrub,Crop/Grass/Shrub,50.0
+Crop/Grass/Shrub,Urban,24.0
+Forest,Water/Wetland,1.0
+Urban,Urban,92.0
+Water/Wetland,Urban,5.0
+Water/Wetland,Water/Wetland,10.0
