@@ -44,14 +44,16 @@ def show_data(gage_id):
         st.image(image, caption='Cell changes')
 
     with col2:
-        try:
-            video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
-            video_bytes = video.read()
-            st.video(video_bytes)
-        except FileNotFoundError:
-            pass
-    csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id))
-    st.write(csv_df)
+        csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id))
+        st.write(csv_df)
+        
+    try:
+        video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
+        video_bytes = video.read()
+        st.video(video_bytes)
+    except FileNotFoundError:
+        pass
+
 
 
 with st.container():
