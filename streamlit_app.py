@@ -4,7 +4,6 @@ import streamlit as st
 import geopandas as gpd
 import pandas as pd
 import leafmap
-import os
 from PIL import Image
 
 # Set wide mode
