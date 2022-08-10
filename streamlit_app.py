@@ -44,9 +44,11 @@ def show_data(gage_id):
         st.image(image, caption='Cell changes')
 
     with col2:
-        csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id))
+        csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id), dtype={"Cell_Count": 'int'})
+        csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2021 Land Use',
+                               'Cell_Count': 'Cell Count'}, inplace=True)
         st.write(csv_df)
-        
+
     try:
         video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
         video_bytes = video.read()
