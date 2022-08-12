@@ -58,7 +58,7 @@ def show_data(gage_id):
             csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2021 Land Use',
                                    'Cell_Count': 'Cell Count'}, inplace=True)
             st.write(csv_df)
-            st.write(f"Percent of cells that have changed to urban landcover: \n {urban_change_sum/cell_sum}%")
+            st.write(f"Percent of cells that have changed to urban landcover: \n {urban_change_sum/cell_sum:.2f}%")
         try:
             video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
             video_bytes = video.read()
