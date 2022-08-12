@@ -52,10 +52,13 @@ def show_data(gage_id):
         with col2:
             st.write("Dataframe of All Cells")
             csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id), dtype={"Cell_Count": 'int'})
+            cell_sum = csv_df["Cell_Count"].sum()
+            urban_change_df = csv_df[(csv_df["New_LU_bin"] == "Urban") & (csv_df["Old_LU_bin"] != "Urban")]
+            urban_change_sum = urban_change_df["Cell_Count"].sum()
             csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2021 Land Use',
                                    'Cell_Count': 'Cell Count'}, inplace=True)
             st.write(csv_df)
-
+            st.write(f"Percent of cells that have changed to urban landcover: \n {urban_change_sum/cell_sum}%")
         try:
             video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
             video_bytes = video.read()
