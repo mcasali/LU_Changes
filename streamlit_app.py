@@ -30,30 +30,36 @@ def get_centroid(gage_id_geo):
 
 
 def show_data(gage_id):
-    df2 = get_centroid(gage_id)
-    main_map = leafmap.Map(center=(st.session_state.zoom_center_x, st.session_state.zoom_center_y),
-                           zoom=st.session_state.zoom_level, draw_control=False, measure_control=False,
-                           google_map="HYBRID")
-    main_map.add_gdf(df2, layer_name=gage_id, zoom_to_layer=False, fill_colors=['blue'])
-    main_map.to_streamlit(responsive=True)
+    if gage_id == "All":
+        df = gpd.read_file("./Data/Geojsons/{}.geojson".format(gage_id))
+        main_map = leafmap.Map(center=(33, -96), zoom=4, draw_control=False, measure_control=False, google_map="HYBRID")
+        main_map.add_gdf(df, layer_name=gage_id, zoom_to_layer=False, fill_colors=['blue'])
+        main_map.to_streamlit(responsive=True)
+    else:
+        df2 = get_centroid(gage_id)
+        main_map = leafmap.Map(center=(st.session_state.zoom_center_x, st.session_state.zoom_center_y),
+                               zoom=st.session_state.zoom_level, draw_control=False, measure_control=False,
+                               google_map="HYBRID")
+        main_map.add_gdf(df2, layer_name=gage_id, zoom_to_layer=False, fill_colors=['blue'])
+        main_map.to_streamlit(responsive=True)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        image = Image.open("./Data/Plots/Tab_area_ID{}_changes.png".format(gage_id))
-        st.image(image, caption='Cell changes')
+        col1, col2 = st.columns(2)
+        with col1:
+            image = Image.open("./Data/Plots/Tab_area_ID{}_changes.png".format(gage_id))
+            st.image(image, caption='Cell changes')
 
-    with col2:
-        csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id), dtype={"Cell_Count": 'int'})
-        csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2021 Land Use',
-                               'Cell_Count': 'Cell Count'}, inplace=True)
-        st.write(csv_df)
+        with col2:
+            csv_df = pd.read_csv("./Data/CSVs/Tab_area_ID{}_final.csv".format(gage_id), dtype={"Cell_Count": 'int'})
+            csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2021 Land Use',
+                                   'Cell_Count': 'Cell Count'}, inplace=True)
+            st.write(csv_df)
 
-    try:
-        video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
-        video_bytes = video.read()
-        st.video(video_bytes)
-    except FileNotFoundError:
-        pass
+        try:
+            video = open("./Data/Timelapses/{}.mp4".format(gage_id), 'rb')
+            video_bytes = video.read()
+            st.video(video_bytes)
+        except FileNotFoundError:
+            pass
 
 
 
