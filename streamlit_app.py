@@ -47,7 +47,7 @@ def show_data(gage_id):
         with col1:
             st.write("Plotting Cell Changes")
             image = Image.open("./Data/Plots/Tab_area_ID{}_changes.png".format(gage_id))
-            st.image(image, caption='Cell changes')
+            st.image(image)
 
         with col2:
             st.write("Dataframe of All Cells")
