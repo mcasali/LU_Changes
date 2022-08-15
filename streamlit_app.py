@@ -24,7 +24,7 @@ st.title("USGS/FORE-SCE Land Use Change Basins, 1978-2021")
 def get_centroid(gage_id_geo):
     df = gpd.read_file("./Data/Geojsons/{}.geojson".format(gage_id_geo))
     st.session_state.zoom_center_y = float(df["geometry"].centroid.x)
-    st.session_state.zoom_center_x = float(df["geometry"].centroid.y) - 0.1
+    st.session_state.zoom_center_x = float(df["geometry"].centroid.y)
     st.session_state.zoom_level = 12
     return df
 
