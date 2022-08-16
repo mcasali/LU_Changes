@@ -18,7 +18,7 @@ if 'zoom_level' not in st.session_state:
     st.session_state.zoom_level = 4
 
 # Main page text
-st.title("USGS/FORE-SCE Land Use Change Basins, 1978-2021")
+st.title("USGS/FORE-SCE Land Use Change Basins, 1979-2021")
 
 
 def get_centroid(gage_id_geo):
