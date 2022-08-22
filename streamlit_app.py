@@ -3,7 +3,7 @@
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
-import geemap.foliumap as geemap
+import leafmap.foliumap as leafmap
 from PIL import Image
 
 # Set wide mode
@@ -32,10 +32,10 @@ def get_centroid(gage_id_geo):
 def show_data(gage_id):
     if gage_id == "All":
         df = gpd.read_file("./Data/Geojsons/{}.geojson".format(gage_id))
-        m = geemap.Map(
+        m = leafmap.Map(
             center=(33, -96),
             zoom=4,
-            basemap="HYBRID",
+            google_map="SATELLITE",
             plugin_Draw=True,
             Draw_export=True,
             locate_control=True,
@@ -45,10 +45,10 @@ def show_data(gage_id):
         m.to_streamlit(responsive=True)
     else:
         df2 = get_centroid(gage_id)
-        m = geemap.Map(
+        m = leafmap.Map(
             center=(st.session_state.zoom_center_x, st.session_state.zoom_center_y),
             zoom=st.session_state.zoom_level,
-            basemap="HYBRID",
+            google_map="SATELLITE",
             plugin_Draw=True,
             Draw_export=True,
             locate_control=True,
