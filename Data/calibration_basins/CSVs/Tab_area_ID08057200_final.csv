@@ -1,0 +1,5 @@
+Old_LU_bin,New_LU_bin,Cell_Count
+Crop/Grass/Shrub,Crop/Grass/Shrub,2.0
+Crop/Grass/Shrub,Urban,60.0
+Forest,Urban,1.0
+Urban,Urban,99.0
