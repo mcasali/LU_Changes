@@ -93,12 +93,12 @@ with st.container():
 
     if data_source == "USGS gagesII":
         st.sidebar.title("Selecting basins:")
-        basin = st.sidebar.selectbox('Select a basin:', ('All','02300700', '11180500', '02310147', '01208950', '03049800',
+        basin = st.sidebar.selectbox('Select a basin:', ('02300700', '11180500', '02310147', '01208950', '03049800',
                                                          '03447894', '02246150', '05400650', '02301990', '02204130',
                                                          '02043500', '06914990'))
     elif data_source == "WRF-Hydro calibration basins":
         st.sidebar.title("Selecting basins:")
-        basin = st.sidebar.selectbox('Select a basin:', ['All','08057200', '08154700', '06893500', '03535400',
+        basin = st.sidebar.selectbox('Select a basin:', ['08057200', '08154700', '06893500', '03535400',
                                                          '03292474', '03277075', '07165562', '07050690', '02335870',
                                                          '02336968', '02392975', '02457595', '02300700', '02207385',
                                                          '0209399200', '02095000', '02087359', '01381400', '01467042',
