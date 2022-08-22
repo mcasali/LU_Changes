@@ -18,7 +18,7 @@ if 'zoom_level' not in st.session_state:
     st.session_state.zoom_level = 4
 
 # Main page text
-st.title("USGS/FORE-SCE Land Use Change Basins, 1979-2021")
+st.title("USGS/FORE-SCE Land Use Change Basins, 1979-2005")
 
 
 def get_centroid(gage_id_geo, source):
@@ -74,7 +74,7 @@ def show_data(gage_id, data_source):
             cell_sum = csv_df["Cell_Count"].sum()
             urban_change_df = csv_df[(csv_df["New_LU_bin"] == "Urban") & (csv_df["Old_LU_bin"] != "Urban")]
             urban_change_sum = urban_change_df["Cell_Count"].sum()
-            csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2021 Land Use',
+            csv_df.rename(columns={'Old_LU_bin': '1978 Land Use', 'New_LU_bin': '2005 Land Use',
                                    'Cell_Count': 'Cell Count'}, inplace=True)
             st.dataframe(csv_df)
             st.write(f"Percent of cells that have changed to urban landcover: ")
