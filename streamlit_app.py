@@ -21,8 +21,8 @@ if 'zoom_level' not in st.session_state:
 st.title("USGS/FORE-SCE Land Use Change Basins, 1979-2021")
 
 
-def get_centroid(gage_id_geo):
-    df = gpd.read_file("./Data/Geojsons/{}.geojson".format(gage_id_geo))
+def get_centroid(gage_id_geo, source):
+    df = gpd.read_file("./Data/{}/Geojsons/{}.geojson".format(source, gage_id_geo))
     st.session_state.zoom_center_y = float(df["geometry"].centroid.x)
     st.session_state.zoom_center_x = float(df["geometry"].centroid.y)
     st.session_state.zoom_level = 12
@@ -49,7 +49,7 @@ def show_data(gage_id, data_source):
         m.add_gdf(df, layer_name=gage_id, zoom_to_layer=False, fill_colors=['blue'], info_mode='on_hover')
         m.to_streamlit(responsive=True)
     else:
-        df2 = get_centroid(gage_id)
+        df2 = get_centroid(gage_id, source)
         m = leafmap.Map(
             center=(st.session_state.zoom_center_x, st.session_state.zoom_center_y),
             zoom=st.session_state.zoom_level,
