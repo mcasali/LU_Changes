@@ -3,11 +3,9 @@
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
-import ee
 import geemap.foliumap as geemap
 from PIL import Image
 
-geemap.set_proxy(port=80)
 # Set wide mode
 st.set_page_config(layout='wide')
 
