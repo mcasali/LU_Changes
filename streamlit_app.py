@@ -60,6 +60,8 @@ def show_data(gage_id, data_source):
             plugin_LatLngPopup=False,
         )
         m.add_gdf(df2, layer_name=gage_id, zoom_to_layer=False, fill_colors=['blue'], info_mode='on_hover')
+        bounds = df2.total_bounds
+        m.zoom_to_bounds(bounds)
         m.to_streamlit(responsive=True)
 
         col1, col2 = st.columns(2)
